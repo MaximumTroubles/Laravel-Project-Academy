@@ -15,7 +15,7 @@ class MainController extends Controller
         $categories = Category::all();
         // dump($products); //? команада laravel 
         // dd($categories); //? die dump выводит данные переменных(свойст,массивов,обьектов и тд) и останавливает дальнейший код
-        return view('main.index', compact('title', 'products', 'subtitle','D ')); //? имя папки первое дальше могут быть еще папки или файлы но ставим . а не / меджу ними 
+        return view('main.index', compact('title', 'products', 'subtitle','categories')); //? имя папки первое дальше могут быть еще папки или файлы но ставим . а не / меджу ними 
 
     }
     public function contacts()

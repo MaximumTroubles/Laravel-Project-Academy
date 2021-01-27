@@ -29,10 +29,10 @@
                   </li>
                   
                   <li class="nav-item">
-                    <a class="nav-link" href="/">Что то будет</a>
+                    <a class="nav-link" href="/sale">Sale</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="/">Что то будет 2</a>
+                    <a class="nav-link" href="/reviews ">Reviews</a>
                   </li>
 
                   <li class="nav-item dropdown">
