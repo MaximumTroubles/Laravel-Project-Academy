@@ -25,6 +25,29 @@
              <div class="invalid-feedback">{{ $message }}</div>
          @enderror
     </div>
-    <button class="btn btn-primary mt-2">Send</button>
+    <button class="btn btn-primary mt-2 mb-4 ">Send</button>
 </form>
+
+@forelse ($reviews as $item)
+    <div class="border col-3 mb-2">
+        <div class="">
+            Name:
+            <p><strong>{{ $item->name }}</strong></p>
+        </div>
+        <div class="">
+            Created at:
+            <p>
+                {{  $item->created_at }}
+            </p>
+        </div>
+        <div class="">
+            Review:
+            <p>{{ $item->review }}</p>
+        </div>
+    </div>
+@empty
+    <p>No reviews</p>
+@endforelse
+
+{{ $reviews->links() }}
 @endsection
