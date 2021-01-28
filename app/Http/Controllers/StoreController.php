@@ -10,9 +10,12 @@ class StoreController extends Controller
 {
     public function sale()
     {
-        $products = Product::all();
+        // $products = Product::where('recomended', '=', 1)->where('price', '<' ,5000)->orWhere('category_id', '=' , 5)->orderBy('name')->limit('5')->get();
         $categories = Category::all();
+        $products = Product::where('recomended', '=', 1)->paginate(3);
+        // $products = Product::where('recomended', '=', 1)->simplepaginate(2);
         // dd($products);
-        return view('main.sale' ,compact('products','categories'));
+       
+        return view('store.sale' ,compact('products','categories'));
     }
 }

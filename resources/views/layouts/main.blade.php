@@ -6,8 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
     {{-- bootstrap --}}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    
     {{-- bootstrap --}}
+
+    <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
     @yield('css')
 </head>
 <body>
@@ -63,7 +65,7 @@
 
     {{-- footer --}}
     <footer>
-        <nav class="navbar fixed-bottom navbar-light" style="background-color: #fffc44; ">
+        <nav class="navbar fixed-bottom navbar-light">
             <div class="container-fluid">
               <a class="navbar-brand" href="#">Footer</a>
             </div>
@@ -72,8 +74,10 @@
 
     {{-- scripts --}}
     {{-- bootstrap --}}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    
     {{-- bootstrap --}}
+
+    <script src="{{ asset('js/app.js') }}"></script>
     @yield('js')
 </body>
 </html>
