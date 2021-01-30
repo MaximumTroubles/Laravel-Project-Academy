@@ -40,6 +40,7 @@
                     <a class="nav-link" href="/news ">News</a>
                   </li>
 
+
                   
                 </ul>
                 <form class="d-flex">
@@ -53,7 +54,17 @@
 
     {{-- Content --}}
     <div class="container">
-        @yield('content')
+        <div class="row">
+          <div class="col-md-3">
+              @section('sidebar')
+                @include('store.parts._list-categories')
+              @show
+          </div>
+          <div class="col-md-9">
+              @yield('content')
+          </div>
+        </div>
+        
     </div>
 
     {{-- footer --}}

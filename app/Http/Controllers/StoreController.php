@@ -18,4 +18,12 @@ class StoreController extends Controller
        
         return view('store.sale' ,compact('products','categories'));
     }
+    public function category($slug)
+    {
+        $category = Category::where('slug', '='  ,$slug)->firstOrFail(); //?  если = тогда можно не писать 
+        $products = Product::where('category_id', $category->id)->paginate(5);
+        // dd($products);
+        return view('store.category', compact('category','products'));
+
+    }
 }

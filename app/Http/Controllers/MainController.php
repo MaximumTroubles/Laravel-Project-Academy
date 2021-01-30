@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request; //? для чего он нужен ? В него попадают данные которые нам возвращаються обратно с сайта с формой или еще чем то 
 use App\Models\Category;
+use App\Models\Product;
 
 class MainController extends Controller
 {
@@ -11,11 +12,12 @@ class MainController extends Controller
     {
         $title = 'Welcome to Home Page';
         $subtitle = '<em>to store</em>';
-        $products = ['Bananas', 'Apples', 'Cherries'];
-        $categories = Category::all();
+        $products = Product::with('category')->get(); //?название метода в Модели
+
+        // $categories = Category::all();
         // dump($products); //? команада laravel 
-        // dd($categories); //? die dump выводит данные переменных(свойст,массивов,обьектов и тд) и останавливает дальнейший код
-        return view('main.index', compact('title', 'products', 'subtitle','categories')); //? имя папки первое дальше могут быть еще папки или файлы но ставим . а не / меджу ними 
+        // dd($products[0]); //? die dump выводит данные переменных(свойст,массивов,обьектов и тд) и останавливает дальнейший код
+        return view('main.index', compact('title', 'products', 'subtitle')); //? имя папки первое дальше могут быть еще папки или файлы но ставим . а не / меджу ними 
 
     }
     public function contacts()
@@ -38,4 +40,5 @@ class MainController extends Controller
         // return redirect('/contacts')->with('success', 'Thank you, your message sended');
         return back()->with('success', 'Thank you, your message sended'); //? возваращает пользователя на ту страницу с которой он пришел
     }
+
 }

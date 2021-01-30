@@ -43,3 +43,7 @@
         </div>
     </form>
 @endsection
+@section('sidebar')
+    <p>Adress:</p>
+    @parent
+@endsection
