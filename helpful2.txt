@@ -13,3 +13,16 @@ composer require barryvdh/laravel-debugbar --dev
 
 
 php artisan route:list - Получаем url адресса и контроллеры которые за них отвечают
+
+Включаем авторизацию с  помощью бутстрап
+php artisan ui bootstrap --auth
+
+Посредник, срабатывает перед конроллером если пользовательно не залогигнг ,перекинь на login
+Route::get('/contacts', [MainController::class, 'contacts'])->middleware('auth') 
+
+
+
+
+
+
+=== Админка  ====

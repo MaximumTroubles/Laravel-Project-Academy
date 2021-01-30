@@ -1,10 +1,14 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\ReviewController;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,4 +42,16 @@ Route::post('/reviews ', [ReviewController::class, 'getReviews']);
 Route::get('/news', [NewsController::class, 'news']);
 
 Route::get('/category/{slug}' ,[StoreController::class ,'category']);
+
+
+Auth::routes();
+
+
+//? admin panel
+Route::middleware(['auth'])->prefix('admin')->group(function(){
+    Route::get('/', [AdminController::class, 'index']);
+    Route::resource('/category', CategoryController::class);
+
+});
+
 

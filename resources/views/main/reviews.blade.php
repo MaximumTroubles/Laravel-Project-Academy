@@ -3,6 +3,7 @@
 <h3>Reviews Page</h3>
 @include('messages.errors')
 
+@auth
 <form action="/reviews" method="POST">
     @csrf
     @if (session('success'))
@@ -27,7 +28,14 @@
     </div>
     <button class="btn btn-primary mt-2 mb-4 ">Send</button>
 </form>
-
+@else
+    
+    <p>
+        For leave review please
+        <a href="/login">Login</a> or
+        <a href="/register">Register</a>
+    </p>
+@endauth
 @forelse ($reviews as $item)
     <div class="border col-3 mb-2">
         <div class="">
