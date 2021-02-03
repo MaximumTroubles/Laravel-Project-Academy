@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request; //? для чего он нужен ? В него попадают данные которые нам возвращаються обратно с сайта с формой или еще чем то 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Review;
 
 class MainController extends Controller
 {
@@ -12,15 +13,18 @@ class MainController extends Controller
     {
         $title = 'Welcome to Home Page';
         $subtitle = '<em>to store</em>';
-        $products = Product::with('category')->get(); //?название метода в Модели
+        $products = Product::with('category')->paginate(9); //?название метода в Модели
+        // $reviews = Product::with('reviews')->get();
+        // dd($reviews);
 
         // $categories = Category::all();
         // dump($products); //? команада laravel 
         // dd($products[0]); //? die dump выводит данные переменных(свойст,массивов,обьектов и тд) и останавливает дальнейший код
-        return view('main.index', compact('title', 'products', 'subtitle')); //? имя папки первое дальше могут быть еще папки или файлы но ставим . а не / меджу ними 
+        return view('main.index', compact('title', 'products', 'subtitle',)); //? имя папки первое дальше могут быть еще папки или файлы но ставим . а не / меджу ними 
 
     }
     public function contacts()
+    
     {
         $title = 'Contacts';
         return view('main.contacts', compact('title'));
