@@ -18,12 +18,9 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class, 'category_id', 'id', 'id'); //? модель с которой надо установить связт, название столбца с внешним ключем, название столбца текущей модели, название столбца связанной модели
     }
-    public function product()
-    {
-        return $this->belongsTo(Category::class);
-    }
     public function reviews()
     {
         return $this->hasMany(Review::class);
     }
+
 }

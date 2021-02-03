@@ -85,5 +85,47 @@ Route::get('/contacts', [MainController::class, 'contacts'])->middleware('auth')
 === Админка  ====
 Создаем отдельный контроллер в отдельной папки для Админки
 php artisan make:controller Admin\AdminCotroller - так мы создаем и папку и сам контроллер.
-И внутри уже работаем с метода как обычно
+И внутри уже работаем с методом как обычно, пока что мы только вывели представление на страницу из папки admin/ index.blade.php (которую скачали c шаблона админЛТЕ) - потом мы создали файл dashboard.blade.php разширили его основным шаблоном из index и в метод  вписываем return view('admin.dashboard');
+
+Так сейчас работает в роутинге. Что такое админка ? это то место где будут (например. Категории) - создаваться, редактироваться, удаляться, сохраняться.(CRUD - create read update delete) И для всего этого надо будет создавать отделбные страницы по типу :
+Route::get('/admin/category/create', [AdminController::class, 'index'])->middleware('admin')
+Route::get('/admin/category/update', [AdminController::class, 'index'])->middleware('admin')
+Route::get('/admin/category/save', [AdminController::class, 'index'])->middleware('admin')
+Route::get('/admin/category/delete', [AdminController::class, 'index'])->middleware('admin')
+И так же в конце нам прописать посредник который проверят на администратора.
+И так же для Продуктов и всего остального на сайте. Получаеться много одинакового кода, есть способ как это сократить.
+Окей, поехали у класса Route есть метод group(function()) - https://laravel.com/docs/8.x/routing#route-groups - который групирует, в нем надо указать безымянную функцию. Но перед методом group() ставиться метод middleware([внутри он принимает массив из посредников]), после него мы может указать Route prefix('admin') - в скобках указываем слово которое всегда посторяеться в URL. и дальше нам его указывать не надо, оно автоматически подствлеться в дальнейших путях. 
+
+Вот такой код получилься:
+Route::middleware(['auth'])->prefix('admin')->group(function(){
+    //Ввнутри получаеться так:
+    Route::get('/',[AdminController::class, 'index']);
+});
+
+Так как CRUD очень часто используемая вещь в laravel есть заготовка контроллера, создаеться командой через composer:
+php artisan make:controller Admin\CategoryController --resources   - пристка --resource делает его ресурсным 
+В контроллере есть уже готовын методы, и для того что б в роутинге не писать каждый отдельный метод на странице есть у класса Route спецальный метод resource() в который мы передаем название URL страницы и контроллер без массива , просто. Выглядит так:
+Route::resource('/category', CategoryController::class);
+Что бы посмотреть как это срабатывает пропишем команду:
+php artisan route:list
+
+
+Есть уже готовые админки для laravel:
+Voyager:
+https://voyager.devdojo.com/
+https://www.youtube.com/watch?list=PL_UnIDIwT95NureFNedKN9_GA6UOiS2ox&v=cbFYqwzxGwY&feature=emb_rel_end&ab_channel=devdojo
+
+Sleepingowl:
+https://sleepingowladmin.ru/#/
+
+Но мы же учиимся, поетому нам надо писать все с нуля, кроме верстки. Для этого мы возмем готовый шаблон
+
+https://adminlte.io/
+https://github.com/ColorlibHQ/AdminLTE
+Тут мы скачали архив и перекинули в нащ проект (index.html, папка dist - в ней все стили, картинки, js файлы. И папку plugins)
+И закадываем index.html в папку views > там создаем папку admin > и переиминовываем в index.blade.php
+А папки dist and plagins закидываем сразу в public 
+Создали папку layouts в папке admin и почистили все что не нам в файле index.blade.php. В центре файла где будет выводиться контет прописывает @yield('content')
+И дальше уже создаем новые файлы и прописывавем там то что надо в сенкции content 
+{{ Auth::user->name }} - Такое пишем там где надо вывести имя Админа 
 

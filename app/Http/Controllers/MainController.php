@@ -13,9 +13,9 @@ class MainController extends Controller
     {
         $title = 'Welcome to Home Page';
         $subtitle = '<em>to store</em>';
-        $products = Product::with('category')->paginate(9); //?название метода в Модели
+        $products = Product::with('category')->withCount('reviews')->paginate(9); //?название метода в Модели
         // $reviews = Product::with('reviews')->get();
-        // dd($reviews);
+        // dd($products[0]);
 
         // $categories = Category::all();
         // dump($products); //? команада laravel 
@@ -24,7 +24,7 @@ class MainController extends Controller
 
     }
     public function contacts()
-    
+
     {
         $title = 'Contacts';
         return view('main.contacts', compact('title'));
@@ -44,5 +44,4 @@ class MainController extends Controller
         // return redirect('/contacts')->with('success', 'Thank you, your message sended');
         return back()->with('success', 'Thank you, your message sended'); //? возваращает пользователя на ту страницу с которой он пришел
     }
-
 }
