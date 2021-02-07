@@ -13,7 +13,7 @@ class MainController extends Controller
     {
         $title = 'Welcome to Home Page';
         $subtitle = '<em>to store</em>';
-        $products = Product::with('category')->withCount('reviews')->paginate(9); //?название метода в Модели
+        $products = Product::with('category')->recomended()->latest()->paginate(9); //?название метода в Модели
         // $reviews = Product::with('reviews')->get();
         // dd($products[0]);
 

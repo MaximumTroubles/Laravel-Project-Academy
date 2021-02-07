@@ -5,6 +5,7 @@
     <p><a href="/product/{{ $product->slug }}">{{ $product->name }}</a></p>
     <p>Category: <a href="/category/{{ $product->category->slug }}">{{ $product->category->name}}</a></p>
     <p><strong>{{ $product->price }}</strong></p>
+    <p>Recommended: {{ $product->recomended }}</p>
     <p>
         <a href="/product/{{ $product->slug }}">Reviews: {{ $product->reviews_count }}</a>
     </p>

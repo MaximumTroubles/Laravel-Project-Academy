@@ -1,0 +1,7 @@
+laravel Collective:
+composer require laravelcollective/html
+Файл менеджер: Unisharp
+composer require unisharp/laravel-filemanager
+php artisan vendor:publish --tag=lfm_config
+php artisan vendor:publish --tag=lfm_public
+php artisan storage:link
