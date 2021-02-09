@@ -1,9 +1,9 @@
 @extends('admin.layouts.index')
 
 @section('content')
-    <h1>Add Category</h1>
+    <h1>Edit Category</h1>
     @include('messages.errors')
-    {!! Form::open(['url' => '/admin/category', 'files'=>true]) !!}
+    {!! Form::model($category ,['url' => '/admin/category/'.$category->id, 'files'=>true, 'method' => 'put']) !!}
         @include('admin.category._form')
     {!! Form::close() !!}
 

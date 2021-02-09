@@ -10,10 +10,17 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
+    // protected $fillable = ['name', 'slug', 'description', 'img'];
+
     public function getImgAttribute($value)
     {
         return $value ? $value : '/img/product-img.jpg';
     }
+    public function getRecomendedAttribute($value)
+    {
+        return $value == 1 ? '<i class="fas fa-check"></i>' : '';
+    }
+
 
     public function category()
     {

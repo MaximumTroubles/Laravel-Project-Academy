@@ -103,7 +103,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
 });
 
 Так как CRUD очень часто используемая вещь в laravel есть заготовка контроллера, создаеться командой через composer:
-php artisan make:controller Admin\CategoryController --resources   - пристка --resource делает его ресурсным 
+php artisan make:controller Admin\CategoryController --resource   - пристка --resource делает его ресурсным 
 В контроллере есть уже готовын методы, и для того что б в роутинге не писать каждый отдельный метод на странице есть у класса Route спецальный метод resource() в который мы передаем название URL страницы и контроллер без массива , просто. Выглядит так:
 Route::resource('/category', CategoryController::class);
 Что бы посмотреть как это срабатывает пропишем команду:

@@ -175,12 +175,18 @@
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <ul class="nav nav-pills nav-sidebar flex-column list-group" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-               <li class="list-item">
+               <li class="list-group-item mb-2">
+                  <i class="fas fa-align-justify pr-2 text-white"></i>
                  <a href="/admin/category">Categories</a>
               </li>
+               <li class="list-group-item mb-2">
+                <i class="fas fa-shopping-bag pr-2 text-white"></i>
+                 <a href="/admin/product">Products</a>
+              </li>
+
 
         </ul>
       </nav>
@@ -252,6 +258,7 @@
 <script src="/dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="/dist/js/pages/dashboard.js"></script>
+{{-- DataTable --}}
 <script src="/plugins/datatables/jquery.dataTables.min.js"></script>
 @yield('js')
 </body>

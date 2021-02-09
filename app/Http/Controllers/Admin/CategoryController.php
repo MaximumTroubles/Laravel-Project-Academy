@@ -37,19 +37,27 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $category = new Category();
-        $category->name = $request->name;
-        $category->slug = $request->slug;
-        $category->description = $request->description;
 
-        $filename = $request->file('imgUpload');
-        if($filename != null){
-            $path = $filename->store('uploads');
-            dd($filename);
-        }
+        $validated = $request->validate([
+            'name' => 'required|min:3|max:255',
+            'slug' =>'unique:App\Models\Category,slug|required',
+        ]);
+        //? Обычное сохранение
+        // $category = new Category();
+        // $category->name = $request->name;
+        // $category->slug = $request->slug;
+        // $category->description = $request->description;
+        // $category->img = $request->img;
+        // $category->save();
 
-        $category->save();
-        return redirect('admin/category');
+        //? Это первый способ добовление пути картинки
+        // $filename = $request->file('imgUpload');
+        // if($filename != null){
+        //     $category->img = $filename->store('uploads');
+        // }
+        
+        Category::create($request->all());
+        return redirect('/admin/category');
     }
 
     /**
@@ -71,7 +79,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        // admin/category/{$id}/edit GET 
+        $category = Category::findOrFail($id);
+        return view('admin.category.edit' , compact('category'));
     }
 
     /**
@@ -83,7 +93,14 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|min:3|max:255',
+            'slug' =>'unique:App\Models\Category,slug,'. $id.'|required',
+        ]);
+        $category = Category::findOrFail($id);
+        $category->update( $request->all());
+
+        return redirect('/admin/category')->with('success', 'Category was Updated');
     }
 
     /**
@@ -94,6 +111,8 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+        Category::findOrFail($id)->delete();
+        return redirect('/admin/category')->with('danger', 'Category '.$id.' was Deleted');
     }
 }
